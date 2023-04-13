@@ -20,6 +20,8 @@ class Instructeur extends BaseController
                         <td>$instructeur->Tussenvoegsel</td>
                         <td>$instructeur->Achternaam</td>
                         <td>$instructeur->Mobiel</td>
+                        <td>$instructeur->DatumInDienst</td>
+                        <td>$instructeur->AantalSterren</td>
                     </tr>";
         }
 

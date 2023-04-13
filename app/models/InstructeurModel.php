@@ -11,7 +11,7 @@ class InstructeurModel
 
     public function getInstructeurs()
     {
-        $sql = "SELECT * FROM Persoon ORDER BY AantalSterren DESC"; // TO DO: change * to column names
+        $sql = "SELECT * FROM Instructeur ORDER BY AantalSterren DESC"; // TO DO: change * to column names
 
         $this->db->query($sql);
 
