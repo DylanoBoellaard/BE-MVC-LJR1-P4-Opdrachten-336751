@@ -9,7 +9,7 @@ class Instructeur extends BaseController
         $this->instructeurModel = $this->model('InstructeurModel');
     }
 
-    public function index() 
+    public function index()
     {
         $result = $this->instructeurModel->getInstructeurs();
 
@@ -22,6 +22,7 @@ class Instructeur extends BaseController
                         <td>$instructeur->Mobiel</td>
                         <td>$instructeur->DatumInDienst</td>
                         <td>$instructeur->AantalSterren</td>
+                        <td><a href='../instructeur/gebruikteVoertuigen/" . $instructeur->Id . "'><img src='../../public/img/Car-logo-transparent.png' alt='car'></a></td>
                     </tr>";
         }
 
@@ -31,5 +32,39 @@ class Instructeur extends BaseController
         ];
 
         $this->view('instructeur/index', $data);
+    }
+
+    public function gebruikteVoertuigen($Id)
+    {
+        $instructeur = $this->instructeurModel->getInstructeurById($Id); // meegeven aan $data
+
+        $result = $this->instructeurModel->getToegewezenVoertuigen($Id);
+
+        if (empty($result)) {
+            $tableRows = "<tr><td colspan='6'>Geen Toegewezen Voertuigen</td></tr>";
+        } else {
+            var_dump($result);
+
+            $tableRows = "";
+            foreach ($result as $voertuig) {
+                $tableRows .= "<tr>
+                        <td>$voertuig->TypeVoertuig</td>
+                        <td>$voertuig->Type</td>
+                        <td>$voertuig->Kenteken</td>
+                        <td>$voertuig->Bouwjaar</td>
+                        <td>$voertuig->Brandstof</td>
+                        <td>$voertuig->Rijbewijscategorie</td>
+                    </tr>";
+            }
+        }
+
+            $data = [
+                'title' => 'Door instructeur gebruikte voertuigen',
+                'tableRows' => $tableRows,
+                'instructeur' => $instructeur
+            ];
+
+            $this->view('instructeur/gebruikteVoertuigen', $data);
+        
     }
 }
