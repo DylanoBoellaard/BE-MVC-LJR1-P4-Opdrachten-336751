@@ -44,7 +44,7 @@ class Instructeur extends BaseController
             $tableRows = "<tr><td colspan='6'>Geen Toegewezen Voertuigen</td></tr>";
             header('Refresh:3; url=/instructeur/index.php');
         } else {
-            var_dump($result);
+            //var_dump($result);
 
             $tableRows = "";
             foreach ($result as $voertuig) {
