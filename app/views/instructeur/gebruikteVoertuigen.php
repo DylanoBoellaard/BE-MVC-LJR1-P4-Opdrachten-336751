@@ -12,7 +12,7 @@
     <h3><?= $data['title'] ?></h3>
 
     <div>
-        <p><?= var_dump($data['instructeur'])?>
+        <p>
             <span>Naam: </span><?= $data['instructeur'][0]->Voornaam . " " . $data['instructeur'][0]->Tussenvoegsel . " " . $data['instructeur'][0]->Achternaam ?>
             <br><span>Datum in dienst: </span><?= $data['instructeur'][0]->DatumInDienst ?>
             <br><span>Aantal sterren: </span><?= $data['instructeur'][0]->AantalSterren ?>
@@ -33,6 +33,7 @@
         </tbody>
     </table>
 
+    <a href="<?= URLROOT ?>/instructeur/index">Selecteer een andere instructeur</a><br>
     <a href="<?= URLROOT ?>/home/index">Terug naar homepage</a>
 </body>
 </html>

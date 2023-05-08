@@ -73,7 +73,7 @@ VALUES
     ,('Mohammed', 'El', 'Yassidi', '06-34291234', '2010-06-14', '*****', 1, NULL, SYSDATE(6), SYSDATE(6));
 
 
--- Stap 04, Create TypeVoertuig table 
+-- Stap 04, Create TypeVoertuig table
 CREATE TABLE IF NOT EXISTS TypeVoertuig
 (
     Id                      TINYINT         UNSIGNED        NOT NULL    AUTO_INCREMENT
