@@ -36,7 +36,7 @@ class Instructeur extends BaseController
 
     public function gebruikteVoertuigen($Id)
     {
-        $instructeur = $this->instructeurModel->getInstructeurById($Id); // meegeven aan $data
+        $instructeur = $this->instructeurModel->getInstructeurById($Id);
 
         $result = $this->instructeurModel->getToegewezenVoertuigen($Id);
 
@@ -67,5 +67,19 @@ class Instructeur extends BaseController
 
             $this->view('instructeur/gebruikteVoertuigen', $data);
         
+    }
+
+    public function beschikbareVoertuigen()
+    {
+        //$instructeur = $this->instructeurModel->getInstructeurById($Id);
+        //$result = $this->instructeurModel->getBeschikbareVoertuigen();
+
+        $data = [
+            'title' => 'Alle beschikbare voertuigen',
+            //'tableRows' => $tableRows,
+            //'instructeur' => $instructeur
+        ];
+
+        $this->view('instructeur/beschikbareVoertuigen', $data);
     }
 }

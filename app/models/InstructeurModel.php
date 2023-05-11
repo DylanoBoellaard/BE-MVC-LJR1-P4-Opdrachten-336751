@@ -52,4 +52,9 @@ class InstructeurModel
 
         return $this->db->resultSet();
     }
+
+    public function getBeschikbareVoertuigen()
+    {
+        // Text
+    }
 }

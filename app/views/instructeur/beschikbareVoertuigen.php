@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gebruikte voertuigen</title>
+    <title>Beschikbare voertuigen</title>
     <link rel="stylesheet" href="../../../public/css/instructeurGlobal.css">
-    <link rel="stylesheet" href="../../../public/css/instructeurVoertuigen.css">
 </head>
 <body>
     <main>
@@ -18,7 +17,6 @@
                 <br><span>Datum in dienst: </span><?= $data['instructeur'][0]->DatumInDienst ?>
                 <br><span>Aantal sterren: </span><?= $data['instructeur'][0]->AantalSterren ?>
             </p>
-            <a href="<?= URLROOT ?>/instructeur/beschikbareVoertuigen">Voertuig Toevoegen</a>
         </div>
 
         <div class="voertuigTable">
@@ -32,14 +30,11 @@
                     <th>Rijbewijscategorie</th>
                 </thead>
                 <tbody>
-                    <?= "test"; //$data['tableRows']; ?>
+                    <?= $data['tableRows']; ?>
                 </tbody>
             </table>
         </div>
 
-        <br>
-        <a href="<?= URLROOT ?>/instructeur/index">Selecteer een andere instructeur</a><br>
-        <a href="<?= URLROOT ?>/home/index">Terug naar homepage</a>
     </main>
 </body>
 </html>
