@@ -23,7 +23,7 @@
                 <th>Datum rijbewijs behaald</th>
             </thead>
             <tbody>
-                <?= $data['tableRows']; ?>
+                <?= var_dump($data['tableRows']); ?>
             </tbody>
         </table>
 
