@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Beschikbare voertuigen</title>
     <link rel="stylesheet" href="../../../public/css/instructeurGlobal.css">
+    <link rel="stylesheet" href="../../../public/css/instructeurVoertuigen.css">
 </head>
 <body>
     <main>
@@ -28,6 +29,7 @@
                     <th>Bouwjaar</th>
                     <th>Brandstof</th>
                     <th>Rijbewijscategorie</th>
+                    <th>Toevoegen</th>
                 </thead>
                 <tbody>
                     <?= $data['tableRows']; ?>

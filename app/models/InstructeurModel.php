@@ -47,7 +47,7 @@ class InstructeurModel
                 FROM Instructeur AS ins
                 
                 WHERE ins.Id = $Id";
-        
+
         $this->db->query($sql);
 
         return $this->db->resultSet();
@@ -55,6 +55,28 @@ class InstructeurModel
 
     public function getBeschikbareVoertuigen()
     {
-        // Text
+        $sql = "SELECT vo.Id, vo.Type, vo.Kenteken, vo.Bouwjaar, vo.Brandstof,
+                        tv.TypeVoertuig, tv.Rijbewijscategorie
+                FROM Voertuig vo
+
+                INNER JOIN TypeVoertuig tv
+                ON vo.TypeVoertuigId = tv.Id
+
+                WHERE vo.Id NOT IN (SELECT VoertuigId FROM VoertuigInstructeur)
+                ORDER BY vo.Id ASC";
+
+        $this->db->query($sql);
+
+        return $this->db->resultSet();
+    }
+
+    public function insertVoertuigInstructeur($instructeurId, $voertuigId)
+    {
+        $sql = "INSERT INTO VoertuigInstructeur (VoertuigId, InstructeurId, DatumToekenning, IsActief, Opmerkingen, DatumAangemaakt, DatumGewijzigd)
+                VALUES ($voertuigId, $instructeurId, SYSDATE(3), 1, NULL, SYSDATE(6), SYSDATE(6))";
+
+        $this->db->query($sql);
+        
+        $this->db->execute();
     }
 }

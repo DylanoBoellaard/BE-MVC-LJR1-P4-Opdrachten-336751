@@ -38,6 +38,8 @@ class Instructeur extends BaseController
     {
         $instructeur = $this->instructeurModel->getInstructeurById($Id);
 
+        $instructeurLink = "<a href='../beschikbareVoertuigen/" . $Id . "'>Toevoegen voertuig</a>";
+
         $result = $this->instructeurModel->getToegewezenVoertuigen($Id);
 
         if (empty($result)) {
@@ -59,27 +61,62 @@ class Instructeur extends BaseController
             }
         }
 
-            $data = [
-                'title' => 'Door instructeur gebruikte voertuigen',
-                'tableRows' => $tableRows,
-                'instructeur' => $instructeur
-            ];
-
-            $this->view('instructeur/gebruikteVoertuigen', $data);
-        
-    }
-
-    public function beschikbareVoertuigen()
-    {
-        //$instructeur = $this->instructeurModel->getInstructeurById($Id);
-        //$result = $this->instructeurModel->getBeschikbareVoertuigen();
-
         $data = [
-            'title' => 'Alle beschikbare voertuigen',
-            //'tableRows' => $tableRows,
-            //'instructeur' => $instructeur
+            'title' => 'Door instructeur gebruikte voertuigen',
+            'tableRows' => $tableRows,
+            'instructeur' => $instructeur,
+            'instructeurLink' => $instructeurLink
         ];
 
-        $this->view('instructeur/beschikbareVoertuigen', $data);
+        $this->view('instructeur/gebruikteVoertuigen', $data);
+    }
+
+    public function beschikbareVoertuigen($Id)
+    {
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $voertuigId = intval($_POST['voertuigId']); // Convert to int
+            $this->instructeurModel->insertVoertuigInstructeur($Id, $voertuigId); // Run insert function with instructeurId & voertuigId as parameters
+            //var_dump($voertuigId);
+            echo "Voertuig succesvol toegevoegd";
+
+            // Redirect to gebruikteVoertuigen page
+            header('Refresh:3; url=/instructeur/gebruikteVoertuigen/' . $Id);
+        } else { // Shows available vehicles
+            $instructeur = $this->instructeurModel->getInstructeurById($Id);
+            $result = $this->instructeurModel->getBeschikbareVoertuigen();
+
+            if ($result == NULL) {
+                echo "Error: Geen beschikbare voertuigen om toe te voegen!";
+                header('Refresh:3; url=/instructeur/gebruikteVoertuigen/' . $Id);
+            } else {
+                $tableRows = "";
+                foreach ($result as $beschikbareVoertuigen) {
+                    $tableRows .= "<tr>
+                        <td>$beschikbareVoertuigen->TypeVoertuig</td>
+                        <td>$beschikbareVoertuigen->Type</td>
+                        <td>$beschikbareVoertuigen->Kenteken</td>
+                        <td>$beschikbareVoertuigen->Bouwjaar</td>
+                        <td>$beschikbareVoertuigen->Brandstof</td>
+                        <td>$beschikbareVoertuigen->Rijbewijscategorie</td>
+                        <td>
+                            <form method='post' action=''>
+                                <input type='hidden' name='voertuigId' value='$beschikbareVoertuigen->Id'>
+                                <button type='submit'>
+                                    <img src='../../public/img/Plus-button.png' alt='plus-button'>
+                                </button>
+                            </form>
+                        </td>
+                    </tr>";
+                }
+
+                $data = [
+                    'title' => 'Alle beschikbare voertuigen',
+                    'instructeur' => $instructeur,
+                    'tableRows' => $tableRows
+                ];
+
+                $this->view('instructeur/beschikbareVoertuigen', $data);
+            }
+        }
     }
 }
