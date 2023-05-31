@@ -18,9 +18,11 @@
                 <br><span>Datum in dienst: </span><?= $data['instructeur'][0]->DatumInDienst ?>
                 <br><span>Aantal sterren: </span><?= $data['instructeur'][0]->AantalSterren ?>
             </p>
-            <a href="<?= URLROOT ?>/instructeur/beschikbareVoertuigen">Voertuig Toevoegen</a>
+            <?= $data['instructeurLink'] ?>
+            
+            
         </div>
-
+<a href=""></a>
         <div class="voertuigTable">
             <table>
                 <thead>
@@ -32,7 +34,7 @@
                     <th>Rijbewijscategorie</th>
                 </thead>
                 <tbody>
-                    <?= "test"; //$data['tableRows']; ?>
+                    <?= $data['tableRows']; ?>
                 </tbody>
             </table>
         </div>

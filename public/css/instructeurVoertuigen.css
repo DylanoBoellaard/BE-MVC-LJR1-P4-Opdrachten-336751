@@ -11,3 +11,7 @@ main {
 .instructeur p span {
     font-weight: bold;
 }
+
+main img {
+    width: 50px;
+}
