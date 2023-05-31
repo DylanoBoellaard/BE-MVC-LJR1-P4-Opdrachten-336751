@@ -1,6 +1,6 @@
 <?php
 
-class InstructeurModel
+class RijlespakketModel
 {
     private $db;
 
@@ -16,11 +16,13 @@ class InstructeurModel
                         ,lpp.StartDatumRijlessen, lpp.DatumRijbewijsBehaald
                  FROM Leerling AS le
                  
-                 INNER JOIN LesPakket AS lp
-                 
                  INNER JOIN LeerlingPerLesPakket AS lpp
-                 ON lp.Id = lpp.LesPakketId
-                 ON le.Id - lpp.LeerlingId";
+                 ON lpp.LeerlingId = le.Id
+
+                 INNER JOIN LesPakket AS lp
+                 ON lpp.LesPakketId = lp.Id
+                 
+                 ORDER BY lpp.StartDatumRijlessen ASC";
 
         $this->db->query($sql);
 
